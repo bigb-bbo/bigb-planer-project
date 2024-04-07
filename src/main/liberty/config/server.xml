@@ -1,9 +1,12 @@
-<server description="Sample Servlet server">
+<server description="BigB Planer Project">
     <featureManager>
-        <feature>servlet-5.0</feature>
+        <feature>restfulWS-3.0</feature>
+        <feature>jsonb-2.0</feature>
     </featureManager>
 
-    <httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"  host="*" />
+    <httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}"
+                  id="defaultHttpEndpoint" host="*" />
 
-    <webApplication id="GradleSample" location="GradleSample.war" contextRoot="${app.context.root}" />
+    <!--<webApplication id="GradleSample" location="GradleSample.war" contextRoot="${app.context.root}" />-->
+    <!--<webApplication location="bigb-planer-project.war" contextRoot="${app.context.root}"/>-->
 </server>
