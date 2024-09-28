@@ -25,6 +25,7 @@ ToDos
       solved by removing <webApplication location="bigb-planer-project.war" contextRoot="${app.context.root}"/> from server.xml
     - removed "--scan" from libertyDev run configuration to fix error when stopping server
   - now at least the REST-services under /api can be found, for example "Hello World" on http://laptop-bigb:9980/bigb-planer-project/api/hello
+- create initial version of getting a plan of rounds...
 - add Test classes before implementing
   - ...
 

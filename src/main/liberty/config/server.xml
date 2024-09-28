@@ -6,5 +6,4 @@
 
     <httpEndpoint httpPort="9980" httpsPort="9443" id="defaultHttpEndpoint" host="*" />
 
-    <application location="bigb-planer-project.war" context-root="/bigb-planer-project" />
 </server>
