@@ -7,7 +7,7 @@ import jakarta.ws.rs.core.MediaType;
 
 import java.util.Properties;
 
-@Path("properties")
+@Path("/properties")
 public class PropertiesResource {
 
     @GET
