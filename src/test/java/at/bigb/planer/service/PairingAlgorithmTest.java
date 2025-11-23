@@ -122,6 +122,29 @@ class PairingAlgorithmTest {
         assertTrue(maxFreq < 10, "No combination should repeat excessively. Max frequency: " + maxFreq);
     }
 
+    @Test
+    @DisplayName("Should distribute player usage as evenly as possible")
+    void testPlayerUsageDistribution() {
+        int rounds = 25; // 10 Spieler, 4 pro Runde, 25 Runden
+        for (int i = 0; i < rounds; i++) {
+            algorithm.selectPlayersForRound(testPlayers);
+        }
+        // Zugriff auf die private Map via Reflection
+        java.lang.reflect.Field usageField;
+        try {
+            usageField = algorithm.getClass().getDeclaredField("playerUsageCount");
+            usageField.setAccessible(true);
+            @SuppressWarnings("unchecked")
+            java.util.Map<String, Integer> usage = (java.util.Map<String, Integer>) usageField.get(algorithm);
+            int min = usage.values().stream().min(Integer::compareTo).orElse(0);
+            int max = usage.values().stream().max(Integer::compareTo).orElse(0);
+            // Maximal 1 Unterschied erlaubt
+            assertTrue(max - min <= 1, "Player usage should be nearly balanced. Min: " + min + ", Max: " + max);
+        } catch (Exception e) {
+            fail("Could not access playerUsageCount: " + e.getMessage());
+        }
+    }
+
     // Helper method to create test players
     private List<Player> createTenTestPlayers() {
         List<Player> players = new ArrayList<>();
@@ -131,4 +154,3 @@ class PairingAlgorithmTest {
         return players;
     }
 }
-

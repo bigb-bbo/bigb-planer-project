@@ -21,6 +21,7 @@ public class ScheduleGenerationService {
     private final PairingAlgorithm algorithm;
     private final PairingAnalyzer analyzer;
     private List<Player> lastGeneratedPlayers = new ArrayList<>();
+    private Plan lastGeneratedPlan; // zuletzt generierter Plan
 
     public ScheduleGenerationService() {
         this.analyzer = new PairingAnalyzer();
@@ -49,10 +50,9 @@ public class ScheduleGenerationService {
 
         // Create plan
         Plan plan = Plan.create(players, config.getNumberOfRounds());
-
-        // Generate rounds
         List<Round> rounds = generateRounds(players, config.getNumberOfRounds());
         plan.setRounds(rounds);
+        lastGeneratedPlan = plan; // Plan speichern
 
         log.info("Schedule generation completed: {} rounds with {} players each",
                 rounds.size(), config.getPlayersPerRound());
@@ -132,5 +132,24 @@ public class ScheduleGenerationService {
         return analyzer.getAllPairingsSortedByFrequency().stream()
                 .map(pairing -> ScheduleMapper.mapPairingToDto(pairing, lastGeneratedPlayers))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Gibt eine Statistik aus, wie oft jeder Spieler im aktuellen Plan vorkommt
+     */
+    public Map<String, Integer> getPlayerUsageStatistics() {
+        if (lastGeneratedPlan == null || lastGeneratedPlan.getRounds() == null) {
+            return Collections.emptyMap();
+        }
+        Map<String, Integer> usage = new HashMap<>();
+        for (Player p : lastGeneratedPlan.getPlayers()) {
+            usage.put(p.getName(), 0);
+        }
+        for (Round r : lastGeneratedPlan.getRounds()) {
+            for (Player p : r.getSelectedPlayers()) {
+                usage.put(p.getName(), usage.getOrDefault(p.getName(), 0) + 1);
+            }
+        }
+        return usage;
     }
 }

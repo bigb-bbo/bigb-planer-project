@@ -17,6 +17,8 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
+import java.util.Map;
+
 /**
  * REST API endpoint for schedule planning operations
  */
@@ -125,6 +127,27 @@ public class PlanerResource {
         } catch (Exception e) {
             log.error("Error retrieving pairings", e);
             throw new InternalServerErrorException("Error retrieving pairings: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Gets player usage statistics
+     *
+     * @return Map of player names to the number of times they have been scheduled
+     */
+    @GET
+    @Path("/player-usage")
+    @Produces("application/json")
+    @Operation(summary = "Get player usage statistics", description = "Returns statistics about how many times players have been scheduled")
+    @APIResponse(responseCode = "200", description = "Player usage statistics retrieved successfully")
+    @APIResponse(responseCode = "500", description = "Internal server error retrieving player usage statistics")
+    public Map<String, Integer> getPlayerUsage() {
+        try {
+            log.info("Retrieving player usage statistics");
+            return scheduleService.getPlayerUsageStatistics();
+        } catch (Exception e) {
+            log.error("Error retrieving player usage statistics", e);
+            throw new InternalServerErrorException("Error retrieving player usage statistics: " + e.getMessage());
         }
     }
 
