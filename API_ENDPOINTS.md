@@ -146,6 +146,28 @@ curl -X GET http://localhost:8080/api/planer/pairings
 
 ---
 
+### 5. Player Usage Statistics
+**Endpoint:** `GET /api/planer/player-usage`
+
+Returns a statistic showing how many times each player was scheduled in the current plan.
+
+**Example Call:**
+```bash
+curl -X GET http://localhost:8080/api/planer/player-usage
+```
+
+**Response (200 OK):**
+```json
+{
+  "Alice": 2,
+  "Bob": 2,
+  "Charlie": 2,
+  "David": 2
+}
+```
+
+---
+
 ## Swagger UI - Interactive API Documentation
 
 After starting the server, the interactive Swagger UI is available at the following link:
