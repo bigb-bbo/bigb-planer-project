@@ -1,103 +1,102 @@
-# Refactoring Summary - BigB Planer Projekt
+# Refactoring Summary - BigB Planer Project
 
-## Durchgeführte Verbesserungen
+## Improvements Made
 
-### 1. ✅ Entfernte unnötige REST-Ressourcen
-- **HelloWorldResource.java** - Demo-Klasse gelöscht
-- **PropertiesResource.java** - System Properties Endpunkt gelöscht
-- **MyApplication.java** - Nicht mehr nötig, Konfiguration erfolgt über `application.properties`
+### 1. ✅ Removed Unnecessary REST Resources
+- **HelloWorldResource.java** - Deleted demo class
+- **PropertiesResource.java** - Deleted system properties endpoint
+- **MyApplication.java** - No longer needed, configuration is done via `application.properties`
 
 ### 2. ✅ Domain Model Cleanup
 
 #### Pairing.java
-- Entfernte `@AllArgsConstructor` - nur `@NoArgsConstructor` notwendig
-- Beibehaltung des custom Konstruktors `Pairing(Set<String> playerIds)`
-- Vereinfachte equals() und hashCode() Implementierungen
+- Removed `@AllArgsConstructor` - only `@NoArgsConstructor` needed
+- Retained the custom constructor `Pairing(Set<String> playerIds)`
+- Simplified equals() and hashCode() implementations
 
 #### Plan.java
-- Keine Änderungen nötig (sauberes Design)
+- No changes needed (clean design)
 
 #### Round.java
-- Keine Änderungen nötig
+- No changes needed
 
 #### Player.java
-- Keine Änderungen nötig
+- No changes needed
 
 #### ScheduleConfig.java
-- Entfernte überflüssige Leerzeilen am Ende
+- Removed unnecessary blank lines at the end
 
 ### 3. ✅ DTO Cleanup
 
 #### PlanDto.java
-- **Entfernte custom toString() Methode** - Lombok @Data generiert einen besseren toString()
+- **Removed custom toString() method** - Lombok @Data generates a better toString()
 
 #### ScheduleConfigDto.java
-- Entfernte überflüssige Leerzeilen am Ende
+- Removed unnecessary blank lines at the end
 
 #### ScheduleStatsDto.java
-- Entfernte überflüssige Leerzeilen am Ende
+- Removed unnecessary blank lines at the end
 
 #### PlayerDto.java
-- Keine Änderungen nötig (bereits sauber)
+- No changes needed (already clean)
 
 #### RoundDto.java
-- Keine Änderungen nötig
+- No changes needed
 
 #### PairingDto.java
-- Keine Änderungen nötig
+- No changes needed
 
 ### 4. ✅ Service Layer Cleanup
 
 #### ScheduleMapper.java
-- **Hinzugefügt: privater Konstruktor** zur Verhinderung von Instantiierung (utility class pattern)
-- Vereinfachter Import: `java.util.Map` statt `java.util.Map<String, Object>`
-- Entfernte überflüssige Leerzeilen am Ende
+- **Added: private constructor** to prevent instantiation (utility class pattern)
+- Simplified import: `java.util.Map` instead of `java.util.Map<String, Object>`
+- Removed unnecessary blank lines at the end
 
 #### ScheduleGenerationService.java
-- Entfernte überflüssige Leerzeilen am Ende
-- Logging bereits optimal konfiguriert
+- Removed unnecessary blank lines at the end
+- Logging already optimally configured
 
 #### PairingAnalyzer.java
-- **Korrigierte getAllPairingsSortedByFrequency()** - verwendet jetzt den neuen Pairing-Konstruktor
-- Entfernte überflüssige Leerzeilen am Ende
+- **Corrected getAllPairingsSortedByFrequency()** - now uses the new Pairing constructor
+- Removed unnecessary blank lines at the end
 
 #### PairingAlgorithm.java
-- Entfernte überflüssige Leerzeilen am Ende
-- Logik und Algorithmus bereits optimal
+- Removed unnecessary blank lines at the end
+- Logic and algorithm already optimal
 
 ### 5. ✅ REST Resource Cleanup
 
 #### PlanerResource.java
-- Vollständig mit OpenAPI Annotations dokumentiert
-- Erweiterte Error Handling
-- Logging für alle Operationen
+- Fully documented with OpenAPI annotations
+- Extended error handling
+- Logging for all operations
 
 ## Code Quality Improvements
 
-| Aspekt | Vorher | Nachher |
+| Aspect | Before | After |
 |--------|--------|---------|
-| Unnötige Dateien | 3 REST-Demo-Klassen | Gelöscht |
-| DTO Boilerplate | Custom toString() | Lombok generiert |
-| Mapper Klasse | Instanziierbar | Private Konstruktor |
-| Whitespace | Überflüssige Leerzeilen | Bereinigt |
-| Imports | Redundante Imports | Vereinfacht |
-| Lombok Annotations | @AllArgsConstructor wo nicht nötig | Entfernt |
+| Unnecessary Files | 3 REST demo classes | Deleted |
+| DTO Boilerplate | Custom toString() | Lombok generated |
+| Mapper Class | Instantiable | Private constructor |
+| Whitespace | Unnecessary blank lines | Cleaned up |
+| Imports | Redundant imports | Simplified |
+| Lombok Annotations | @AllArgsConstructor where not needed | Removed |
 
 ## Build Status
 
-✅ **Kompilierung:** Erfolgreich
-✅ **Keine Fehler:** Alle Dateien korrigiert
-✅ **Tests:** Bestehen weiterhin
+✅ **Compilation:** Successful
+✅ **No Errors:** All files corrected
+✅ **Tests:** Still pass
 
-## Zusammenfassung
+## Summary
 
-Das Refactoring hat folgende Verbesserungen gebracht:
+The refactoring brought the following improvements:
 
-1. **Weniger Code** - Unnötige Klassen und Boilerplate entfernt
-2. **Bessere Wartbarkeit** - Klarere Struktur und weniger Redundanz
-3. **Konsistentere Codebasis** - Einheitliches Format überall
-4. **Optimierte Dependencies** - Lombok nutzt vollständiges Potential
-5. **Sauberere Utility-Klassen** - Private Konstruktoren für Stateless Mapper
+1. **Less Code** - Removed unnecessary classes and boilerplate
+2. **Better Maintainability** - Clearer structure and less redundancy
+3. **More Consistent Codebase** - Uniform format everywhere
+4. **Optimized Dependencies** - Lombok uses full potential
+5. **Cleaner Utility Classes** - Private constructors for stateless mappers
 
-Das Projekt ist nun cleaner und wartbarer, ohne Funktionalitätsverluste! 🎉
-
+The project is now cleaner and more maintainable, without loss of functionality! 🎉

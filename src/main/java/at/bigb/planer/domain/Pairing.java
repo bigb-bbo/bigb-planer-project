@@ -33,4 +33,3 @@ public class Pairing {
         return playerIds.hashCode();
     }
 }
-

@@ -1,20 +1,20 @@
-# BigB Planer - API Dokumentation
+# BigB Planer - API Documentation
 
-## Übersicht
+## Overview
 
-Die REST API ist unter folgendem Base Path erreichbar:
+The REST API is accessible under the following base path:
 ```
 http://localhost:8080/api
 ```
 
-## API Endpunkte
+## API Endpoints
 
 ### 1. Health Check
 **Endpoint:** `GET /api/planer/health`
 
-Prüft, ob der API-Service verfügbar ist.
+Checks if the API service is available.
 
-**Beispiel-Aufruf:**
+**Example Call:**
 ```bash
 curl -X GET http://localhost:8080/api/planer/health
 ```
@@ -28,10 +28,10 @@ curl -X GET http://localhost:8080/api/planer/health
 
 ---
 
-### 2. Schedule generieren
+### 2. Generate Schedule
 **Endpoint:** `POST /api/planer/generate`
 
-Generiert einen optimierten Spielplan basierend auf den eingegebenen Spielernamen und der Anzahl der Runden.
+Generates an optimized game schedule based on the entered player names and the number of rounds.
 
 **Request Body:**
 ```json
@@ -46,7 +46,7 @@ Generiert einen optimierten Spielplan basierend auf den eingegebenen Spielername
 }
 ```
 
-**Beispiel-Aufruf:**
+**Example Call:**
 ```bash
 curl -X POST http://localhost:8080/api/planer/generate \
   -H "Content-Type: application/json" \
@@ -88,21 +88,21 @@ curl -X POST http://localhost:8080/api/planer/generate \
 }
 ```
 
-**Mögliche Fehler:**
+**Possible Errors:**
 - **400 Bad Request:** 
-  - Weniger als 4 Spieler
-  - 0 oder negative Anzahl von Runden
-  - Leere Spielerliste
-  - Doppelte Spielernamen
+  - Fewer than 4 players
+  - 0 or negative number of rounds
+  - Empty player list
+  - Duplicate player names
 
 ---
 
-### 3. Paarungsstatistiken
+### 3. Pairing Statistics
 **Endpoint:** `GET /api/planer/statistics`
 
-Gibt Statistiken über die Spielerpaarungen zurück.
+Returns statistics about the player pairings.
 
-**Beispiel-Aufruf:**
+**Example Call:**
 ```bash
 curl -X GET http://localhost:8080/api/planer/statistics
 ```
@@ -120,12 +120,12 @@ curl -X GET http://localhost:8080/api/planer/statistics
 
 ---
 
-### 4. Alle Paarungen abrufen
+### 4. Retrieve All Pairings
 **Endpoint:** `GET /api/planer/pairings`
 
-Gibt eine Liste aller Spielerpaarungen sortiert nach Häufigkeit zurück.
+Returns a list of all player pairings sorted by frequency.
 
-**Beispiel-Aufruf:**
+**Example Call:**
 ```bash
 curl -X GET http://localhost:8080/api/planer/pairings
 ```
@@ -146,32 +146,24 @@ curl -X GET http://localhost:8080/api/planer/pairings
 
 ---
 
-## Swagger UI - Interaktive API Dokumentation
+## Swagger UI - Interactive API Documentation
 
-Nach dem Start des Servers ist die interaktive Swagger UI unter folgendem Link erreichbar:
+After starting the server, the interactive Swagger UI is available at the following link:
 
 ```
 http://localhost:8080/swagger-ui
 ```
 
-Hier kannst du:
-- Alle verfügbaren Endpunkte sehen
-- Request/Response Schemas einsehen
-- Endpunkte direkt aus dem Browser testen
-
-### OpenAPI Spezifikation
-
-Die vollständige OpenAPI Spezifikation ist unter folgendem Link erreichbar:
-
-```
-http://localhost:8080/openapi
-```
+Here you can:
+- See all available endpoints
+- View request/response schemas
+- Test endpoints directly from the browser
 
 ---
 
-## Konfiguration
+## Configuration
 
-Die API ist in der `application.properties` wie folgt konfiguriert:
+The API is configured in the `application.properties` as follows:
 
 ```properties
 # REST API Path
@@ -187,32 +179,32 @@ quarkus.http.port=8080
 
 ---
 
-## Server starten
+## Starting the Server
 
 ```bash
 ./gradlew.bat quarkusDev
 ```
 
-Der Server startet dann auf `http://localhost:8080` im Development Mode mit Hot-Reload.
+The server then starts at `http://localhost:8080` in development mode with hot-reload.
 
 ---
 
-## Validierungsregeln
+## Validation Rules
 
-Beim Generieren eines Schedules werden folgende Regeln überprüft:
+When generating a schedule, the following rules are checked:
 
-1. **Mindestens 4 Spieler erforderlich**
-2. **Mindestens 1 Runde erforderlich**
-3. **Keine doppelten Spielernamen**
-4. **Keine leere Spielerliste**
+1. **At least 4 players required**
+2. **At least 1 round required**
+3. **No duplicate player names**
+4. **No empty player list**
 
-Bei Verletzung dieser Regeln wird ein **400 Bad Request** mit einer entsprechenden Fehlermeldung zurückgegeben.
+If these rules are violated, a **400 Bad Request** is returned with an appropriate error message.
 
 ---
 
-## Beispiel-Workflow
+## Example Workflow
 
-1. **Server starten:**
+1. **Start Server:**
    ```bash
    ./gradlew.bat quarkusDev
    ```
@@ -222,20 +214,19 @@ Bei Verletzung dieser Regeln wird ein **400 Bad Request** mit einer entsprechend
    curl http://localhost:8080/api/planer/health
    ```
 
-3. **Schedule generieren:**
+3. **Generate Schedule:**
    ```bash
    curl -X POST http://localhost:8080/api/planer/generate \
      -H "Content-Type: application/json" \
      -d '{"playerNames":["A","B","C","D","E","F","G","H","I","J"],"numberOfRounds":5,"playersPerRound":4}'
    ```
 
-4. **Statistiken abrufen:**
+4. **Retrieve Statistics:**
    ```bash
    curl http://localhost:8080/api/planer/statistics
    ```
 
-5. **Swagger UI öffnen:**
+5. **Open Swagger UI:**
    ```
    http://localhost:8080/swagger-ui
    ```
-

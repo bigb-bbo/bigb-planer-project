@@ -12,13 +12,13 @@ Project including
 - use DTOs for data exchange together with mapper to map domain objects to and from DTOs
 - OpenAPI/Swagger UI for interactive API documentation
 
-## Architektur-Migration: Von OpenLiberty zu Quarkus
+## Architecture Migration: From OpenLiberty to Quarkus
 
-Das Projekt wurde von OpenLiberty auf **Quarkus** migriert. Quarkus ist ein modernes Java Framework, das:
-- Schnellere Startup-Zeiten bietet
-- Niedrigere Memory-Nutzung hat
-- Native Image Compilation ermöglicht
-- Hot-Reload im Development Mode unterstützt
+The project was migrated from OpenLiberty to **Quarkus**. Quarkus is a modern Java framework that:
+- Offers faster startup times
+- Has lower memory usage
+- Enables native image compilation
+- Supports hot-reload in development mode
 
 ## Server starten
 

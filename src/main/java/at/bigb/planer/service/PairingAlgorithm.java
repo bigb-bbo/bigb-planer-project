@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class PairingAlgorithm {
 
     private final PairingAnalyzer analyzer;
-    private final Map<String, Integer> playerUsageCount = new HashMap<>(); // Einsatzhäufigkeit
+    private final Map<String, Integer> playerUsageCount = new HashMap<>(); // Usage count
 
     public PairingAlgorithm(PairingAnalyzer analyzer) {
         this.analyzer = analyzer;
@@ -32,18 +32,18 @@ public class PairingAlgorithm {
             throw new IllegalArgumentException("Need at least 4 players");
         }
 
-        // Initialisiere Zählung, falls leer
+        // Initialize usage count if empty
         for (Player p : availablePlayers) {
             playerUsageCount.putIfAbsent(p.getId(), 0);
         }
 
         log.debug("Selecting players for round from {} available players", availablePlayers.size());
 
-        // Alle möglichen Kombinationen
+        // All possible combinations
         List<List<Player>> allCombinations = generateAllCombinations(availablePlayers);
         log.debug("Generated {} possible combinations", allCombinations.size());
 
-        // Sortiere nach minimaler maximaler Einsatzhäufigkeit, dann nach Pairing-Frequenz
+        // Sort by minimal maximal usage count, then by pairing frequency
         List<List<Player>> sortedCombinations = allCombinations.stream()
                 .sorted((comb1, comb2) -> {
                     int sumUsage1 = comb1.stream().mapToInt(p -> playerUsageCount.getOrDefault(p.getId(), 0)).sum();
@@ -56,7 +56,7 @@ public class PairingAlgorithm {
                     if (maxUsage1 != maxUsage2) {
                         return Integer.compare(maxUsage1, maxUsage2);
                     }
-                    // Falls gleich, wie bisher nach Pairing-Frequenz
+                    // If equal, sort by pairing frequency as before
                     return compareCombinations(comb1, comb2);
                 })
                 .toList();
@@ -64,7 +64,7 @@ public class PairingAlgorithm {
         // Return the combination with the lowest total frequency
         List<Player> selectedPlayers = sortedCombinations.get(0);
         analyzer.recordPairing(selectedPlayers);
-        // Zählung aktualisieren
+        // Update usage count
         for (Player p : selectedPlayers) {
             playerUsageCount.put(p.getId(), playerUsageCount.getOrDefault(p.getId(), 0) + 1);
         }

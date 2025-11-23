@@ -87,7 +87,7 @@ public class ScheduleMapper {
             .map(id -> allPlayers.stream()
                 .filter(p -> p.getId().equals(id))
                 .map(Player::getName)
-                .findFirst().orElse(id)) // Falls Name nicht gefunden, ID anzeigen
+                .findFirst().orElse(id)) // If name not found, show ID
             .toList();
         return new PairingDto(playerNames, pairing.getFrequency());
     }

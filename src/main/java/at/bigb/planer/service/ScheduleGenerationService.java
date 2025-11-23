@@ -21,7 +21,7 @@ public class ScheduleGenerationService {
     private final PairingAlgorithm algorithm;
     private final PairingAnalyzer analyzer;
     private List<Player> lastGeneratedPlayers = new ArrayList<>();
-    private Plan lastGeneratedPlan; // zuletzt generierter Plan
+    private Plan lastGeneratedPlan; // last generated plan
 
     public ScheduleGenerationService() {
         this.analyzer = new PairingAnalyzer();
@@ -52,7 +52,7 @@ public class ScheduleGenerationService {
         Plan plan = Plan.create(players, config.getNumberOfRounds());
         List<Round> rounds = generateRounds(players, config.getNumberOfRounds());
         plan.setRounds(rounds);
-        lastGeneratedPlan = plan; // Plan speichern
+        lastGeneratedPlan = plan; // save plan
 
         log.info("Schedule generation completed: {} rounds with {} players each",
                 rounds.size(), config.getPlayersPerRound());
@@ -70,7 +70,7 @@ public class ScheduleGenerationService {
         for (int i = 1; i <= numberOfRounds; i++) {
             Round round = new Round();
             round.setRoundNo(i);
-            round.setRoundDate(baseDate.plusDays((long) (i - 1) * 7)); // Weekly schedule
+            round.setRoundDate(baseDate.plusDays((long) (i - 1) * 7)); // weekly schedule
 
             // Select 4 players using the greedy algorithm
             List<Player> selectedPlayers = algorithm.selectPlayersForRound(players);
@@ -135,7 +135,7 @@ public class ScheduleGenerationService {
     }
 
     /**
-     * Gibt eine Statistik aus, wie oft jeder Spieler im aktuellen Plan vorkommt
+     * Returns a statistic of how often each player appears in the current plan
      */
     public Map<String, Integer> getPlayerUsageStatistics() {
         if (lastGeneratedPlan == null || lastGeneratedPlan.getRounds() == null) {
