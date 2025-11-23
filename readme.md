@@ -33,7 +33,6 @@ Der Server startet auf `http://localhost:8080` mit automatischem Hot-Reload bei 
 - **Base URL:** `http://localhost:8080/api`
 - **Health Check:** `http://localhost:8080/api/planer/health`
 - **Swagger UI:** `http://localhost:8080/swagger-ui`
-- **OpenAPI Spec:** `http://localhost:8080/openapi`
 
 ## Verfügbare Endpunkte
 

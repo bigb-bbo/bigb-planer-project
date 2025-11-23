@@ -1,9 +1,0 @@
-<server description="BigB Planer Project">
-    <featureManager>
-        <feature>restfulWS-3.0</feature>
-        <feature>jsonb-2.0</feature>
-    </featureManager>
-
-    <httpEndpoint httpPort="9980" httpsPort="9443" id="defaultHttpEndpoint" host="*" />
-
-</server>
