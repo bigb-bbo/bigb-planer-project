@@ -1,2 +1,12 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    plugins {
+        id 'io.quarkus' version '3.6.0'
+    }
+}
+
 rootProject.name = 'bigb-planer-project'
 

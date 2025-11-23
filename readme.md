@@ -2,36 +2,113 @@ BigB Planer
 
 Project including 
 - gradle build concepts 
-- using open liberty server and
+- using Quarkus as web server
 - an in-memory database
 - define unit tests for all features
 - try to reach a coverage of over 90%
 - based on domain driven design concepts, for
-- generating a planing sheet (usable for trainings, ...)
-- use RESTful service to access the planing functionality
-- use DTOs for data exchange together with MapStruct to map domain objects to and from DTOs
+- generating a planning sheet (usable for trainings, ...)
+- use RESTful service to access the planning functionality
+- use DTOs for data exchange together with mapper to map domain objects to and from DTOs
+- OpenAPI/Swagger UI for interactive API documentation
 
-FIXED ISSUES:
-- fix libertyStart command DONE
-  - DONE by previously executing "installFeatures" task
-- fix libertyRun/libertyDev command (wrong port? deploy applications?)
-  - DONE by adding server.xml file under liberty folder with adapted port
-- introduce RESTful service
-  - DONE from here https://github.com/OpenLiberty/demo-devmode
-    - also BUILD process of liberty needs to be adapted since (old) tests are executed !!!
-  - issue SOLVED:
-    - running server had error message:
-      [FEHLER  ] CWWKZ0013E: Es ist nicht möglich, zwei Anwendungen mit dem Namen bigb-planer-project zu starten.
-      solved by removing <webApplication location="bigb-planer-project.war" contextRoot="${app.context.root}"/> from server.xml
-    - removed "--scan" from libertyDev run configuration to fix error when stopping server
-  - now at least the REST-services under /api can be found, for example "Hello World" on http://laptop-bigb:9980/bigb-planer-project/api/hello
-  - or system properties under http://laptop-bigb:9980/bigb-planer-project/api/properties
-- my application can now be accessed under http://laptop-bigb:9980/bigb-planer-project/api/planer
+## Architektur-Migration: Von OpenLiberty zu Quarkus
 
-Current issues:
-- none
- 
-TODOs:
-- create initial version of getting a plan of rounds...
-- add Test classes before implementing
-  - ...
+Das Projekt wurde von OpenLiberty auf **Quarkus** migriert. Quarkus ist ein modernes Java Framework, das:
+- Schnellere Startup-Zeiten bietet
+- Niedrigere Memory-Nutzung hat
+- Native Image Compilation ermöglicht
+- Hot-Reload im Development Mode unterstützt
+
+## Server starten
+
+```bash
+./gradlew.bat quarkusDev
+```
+
+Der Server startet auf `http://localhost:8080` mit automatischem Hot-Reload bei Codeänderungen.
+
+## API Access
+
+- **Base URL:** `http://localhost:8080/api`
+- **Health Check:** `http://localhost:8080/api/planer/health`
+- **Swagger UI:** `http://localhost:8080/swagger-ui`
+- **OpenAPI Spec:** `http://localhost:8080/openapi`
+
+## Verfügbare Endpunkte
+
+1. **Health Check:**
+   ```
+   GET /api/planer/health
+   ```
+
+2. **Schedule generieren:**
+   ```
+   POST /api/planer/generate
+   ```
+   Body:
+   ```json
+   {
+     "playerNames": ["Alice", "Bob", "Charlie", "..."],
+     "numberOfRounds": 5,
+     "playersPerRound": 4
+   }
+   ```
+
+3. **Statistiken abrufen:**
+   ```
+   GET /api/planer/statistics
+   ```
+
+4. **Paarungen abrufen:**
+   ```
+   GET /api/planer/pairings
+   ```
+
+Für detaillierte API-Dokumentation siehe `API_ENDPOINTS.md`
+
+## Tests ausführen
+
+```bash
+./gradlew.bat test
+```
+
+Für spezifische Tests:
+```bash
+./gradlew.bat test --tests "ScheduleGenerationServiceTest"
+./gradlew.bat test --tests "PlanerResourceUnitTest"
+```
+
+## FIXED ISSUES:
+- Migriert von OpenLiberty zu Quarkus DONE
+  - Schnellere Startup-Zeiten
+  - Bessere Development Experience mit Hot-Reload
+  - Native Image Support
+- OpenAPI/Swagger UI eingebunden DONE
+  - Interaktive API-Dokumentation unter /swagger-ui
+  - Automatisch generierte Dokumentation basierend auf Annotations
+- REST-Services korrekt konfiguriert DONE
+  - Base Path: /api
+  - Alle Endpunkte dokumentiert und getestet
+
+## TODOs:
+- UI-Layer erstellen (Frontend mit React/Vue/Angular)
+- Persistierung (Datenbank statt In-Memory)
+- Authentication & Authorization
+- API-Rate Limiting
+- Erweiterte Validierungen
+- Performance-Optimierungen für große Spielerlisten
+          RestAssured.port = 9980;
+          RestAssured.basePath = "/bigb-planer-project/api";
+      }
+  
+      @Test
+      public void testPlanerResourceIsAccessible() {
+          given()
+              .when()
+              .get("/planer")
+              .then()
+              .statusCode(200)
+              .body("message", equalTo("Expected response message"));
+      }
+  }

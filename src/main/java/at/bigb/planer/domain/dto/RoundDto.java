@@ -1,4 +1,4 @@
-package at.bigb.planer.domain;
+package at.bigb.planer.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,9 +10,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Round {
-
+public class RoundDto {
     private int roundNo;
     private LocalDate roundDate;
-    private List<Player> selectedPlayers;
+    private List<PlayerDto> selectedPlayers;
 }

@@ -4,16 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * DTO for schedule generation request input
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlanDto {
-    private String id;
-    private List<PlayerDto> players;
-    private List<RoundDto> rounds;
+public class ScheduleConfigDto {
+    private List<String> playerNames;
     private int numberOfRounds;
-    private LocalDateTime createdAt;
+    private int playersPerRound = 4;
 }

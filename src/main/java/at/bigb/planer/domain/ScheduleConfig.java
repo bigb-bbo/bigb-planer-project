@@ -4,15 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Configuration for schedule generation
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Round {
-
-    private int roundNo;
-    private LocalDate roundDate;
-    private List<Player> selectedPlayers;
+public class ScheduleConfig {
+    private List<String> playerNames;
+    private int numberOfRounds;
+    private int playersPerRound;
 }
