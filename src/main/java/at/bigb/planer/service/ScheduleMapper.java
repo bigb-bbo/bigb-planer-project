@@ -7,6 +7,7 @@ import at.bigb.planer.domain.Round;
 import at.bigb.planer.domain.ScheduleConfig;
 import at.bigb.planer.domain.dto.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -81,10 +82,14 @@ public class ScheduleMapper {
         );
     }
 
-    public static PairingDto mapPairingToDto(Pairing pairing) {
-        return new PairingDto(
-                pairing.getPlayerIds().stream().toList(),
-                pairing.getFrequency()
-        );
+    public static PairingDto mapPairingToDto(Pairing pairing, List<Player> allPlayers) {
+        List<String> playerNames = pairing.getPlayerIds().stream()
+            .map(id -> allPlayers.stream()
+                .filter(p -> p.getId().equals(id))
+                .map(Player::getName)
+                .findFirst().orElse(id)) // Falls Name nicht gefunden, ID anzeigen
+            .toList();
+        return new PairingDto(playerNames, pairing.getFrequency());
     }
+
 }

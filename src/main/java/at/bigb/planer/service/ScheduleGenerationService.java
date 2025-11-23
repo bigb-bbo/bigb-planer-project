@@ -20,6 +20,7 @@ public class ScheduleGenerationService {
 
     private final PairingAlgorithm algorithm;
     private final PairingAnalyzer analyzer;
+    private List<Player> lastGeneratedPlayers = new ArrayList<>();
 
     public ScheduleGenerationService() {
         this.analyzer = new PairingAnalyzer();
@@ -44,6 +45,7 @@ public class ScheduleGenerationService {
 
         // Create players with IDs
         List<Player> players = createPlayers(config.getPlayerNames());
+        lastGeneratedPlayers = players;
 
         // Create plan
         Plan plan = Plan.create(players, config.getNumberOfRounds());
@@ -128,7 +130,7 @@ public class ScheduleGenerationService {
      */
     public List<PairingDto> getAllPairingsSorted() {
         return analyzer.getAllPairingsSortedByFrequency().stream()
-                .map(ScheduleMapper::mapPairingToDto)
+                .map(pairing -> ScheduleMapper.mapPairingToDto(pairing, lastGeneratedPlayers))
                 .collect(Collectors.toList());
     }
 }

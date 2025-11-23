@@ -185,5 +185,24 @@ class PlanerResourceUnitTest {
 
         assertEquals(expectedNames, resultPlayerNames);
     }
-}
 
+    @Test
+    @DisplayName("Pairings endpoint should return only player names and frequency")
+    void testPairingsEndpointReturnsPlayerNamesOnly() {
+        // Schedule generieren
+        ScheduleConfigDto configDto = new ScheduleConfigDto();
+        configDto.setPlayerNames(Arrays.asList("Anna", "Ben", "Chris", "Dora"));
+        configDto.setNumberOfRounds(2);
+        configDto.setPlayersPerRound(4);
+        resource.generateSchedule(configDto);
+
+        List<PairingDto> pairings = resource.getAllPairings();
+        assertNotNull(pairings);
+        assertFalse(pairings.isEmpty());
+        for (PairingDto dto : pairings) {
+            assertNotNull(dto.getPlayerNames(), "playerNames should not be null");
+            assertFalse(dto.getPlayerNames().isEmpty(), "playerNames should contain names");
+            assertTrue(dto.getFrequency() >= 1, "frequency should be >= 1");
+        }
+    }
+}
