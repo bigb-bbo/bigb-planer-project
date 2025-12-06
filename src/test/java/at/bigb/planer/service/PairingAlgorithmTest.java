@@ -125,7 +125,7 @@ class PairingAlgorithmTest {
     @Test
     @DisplayName("Should distribute player usage as evenly as possible")
     void testPlayerUsageDistribution() {
-        int rounds = 25; // 10 Spieler, 4 pro Runde, 25 Runden
+        int rounds = 25; // 10 players, 4 per round, 25 rounds
         for (int i = 0; i < rounds; i++) {
             algorithm.selectPlayersForRound(testPlayers);
         }

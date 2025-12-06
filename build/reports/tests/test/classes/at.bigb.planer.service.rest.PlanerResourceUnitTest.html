@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - PlanerResource Unit Tests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>PlanerResource Unit Tests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/at.bigb.planer.service.rest.html">at.bigb.planer.service.rest</a> &gt; PlanerResourceUnitTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">13</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.118s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">Generated schedule should have all required fields</td>
+<td class="success">testGenerateScheduleCompleteResponse()</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Generate schedule should use all provided players</td>
+<td class="success">testGenerateScheduleIncludesAllPlayers()</td>
+<td class="success">0.037s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Generate schedule should reject configuration with duplicate names</td>
+<td class="success">testGenerateScheduleRejectsDuplicateNames()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Generate schedule should reject empty player list</td>
+<td class="success">testGenerateScheduleRejectsEmptyPlayerList()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Generate schedule should reject configuration with too few players</td>
+<td class="success">testGenerateScheduleRejectsTooFewPlayers()</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Generate schedule should reject configuration with 0 rounds</td>
+<td class="success">testGenerateScheduleRejectsZeroRounds()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Generated schedule should have correct round structure</td>
+<td class="success">testGenerateScheduleRoundStructure()</td>
+<td class="success">0.009s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Generate schedule should accept valid configuration</td>
+<td class="success">testGenerateScheduleWithValidConfig()</td>
+<td class="success">0.041s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Get all pairings should return list</td>
+<td class="success">testGetAllPairings()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Health endpoint should return OK status</td>
+<td class="success">testGetHealthEndpoint()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Get statistics should return valid stats</td>
+<td class="success">testGetStatistics()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Pairings endpoint should return only player names and frequency</td>
+<td class="success">testPairingsEndpointReturnsPlayerNamesOnly()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Player usage endpoint should return correct usage statistics</td>
+<td class="success">testPlayerUsageEndpoint()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2634409+01:00&quot;,&quot;sequence&quot;:56,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Retrieving all pairings&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2664314+01:00&quot;,&quot;sequence&quot;:57,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Received schedule generation request with 5 players and 5 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2664314+01:00&quot;,&quot;sequence&quot;:58,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Generating schedule with 5 players and 5 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2674312+01:00&quot;,&quot;sequence&quot;:59,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;ERROR&quot;,&quot;message&quot;:&quot;Invalid configuration: Duplicate player names are not allowed&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2704322+01:00&quot;,&quot;sequence&quot;:60,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Received schedule generation request with 4 players and 2 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2704322+01:00&quot;,&quot;sequence&quot;:61,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Generating schedule with 4 players and 2 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2714319+01:00&quot;,&quot;sequence&quot;:62,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Schedule generation completed: 2 rounds with 4 players each&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2714319+01:00&quot;,&quot;sequence&quot;:63,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Retrieving all pairings&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2756056+01:00&quot;,&quot;sequence&quot;:64,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Received schedule generation request with 4 players and 4 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2766031+01:00&quot;,&quot;sequence&quot;:65,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Generating schedule with 4 players and 4 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2766031+01:00&quot;,&quot;sequence&quot;:66,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Schedule generation completed: 4 rounds with 4 players each&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2776045+01:00&quot;,&quot;sequence&quot;:67,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Retrieving player usage statistics&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2826019+01:00&quot;,&quot;sequence&quot;:68,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Received schedule generation request with 0 players and 5 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2826019+01:00&quot;,&quot;sequence&quot;:69,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Generating schedule with 0 players and 5 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2836092+01:00&quot;,&quot;sequence&quot;:70,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;ERROR&quot;,&quot;message&quot;:&quot;Invalid configuration: Player names list cannot be empty&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.285606+01:00&quot;,&quot;sequence&quot;:71,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Received schedule generation request with 10 players and 5 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.2866076+01:00&quot;,&quot;sequence&quot;:72,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Generating schedule with 10 players and 5 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.319665+01:00&quot;,&quot;sequence&quot;:73,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Schedule generation completed: 5 rounds with 4 players each&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.3235723+01:00&quot;,&quot;sequence&quot;:74,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Received schedule generation request with 8 players and 3 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.324571+01:00&quot;,&quot;sequence&quot;:75,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Generating schedule with 8 players and 3 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.3311021+01:00&quot;,&quot;sequence&quot;:76,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Schedule generation completed: 3 rounds with 4 players each&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.3356668+01:00&quot;,&quot;sequence&quot;:77,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Received schedule generation request with 4 players and 1 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.3356668+01:00&quot;,&quot;sequence&quot;:78,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Generating schedule with 4 players and 1 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.3368882+01:00&quot;,&quot;sequence&quot;:79,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Schedule generation completed: 1 rounds with 4 players each&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.3423773+01:00&quot;,&quot;sequence&quot;:80,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Retrieving pairing statistics&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.3447383+01:00&quot;,&quot;sequence&quot;:81,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Received schedule generation request with 10 players and 5 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.3469142+01:00&quot;,&quot;sequence&quot;:82,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Generating schedule with 10 players and 5 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.3846666+01:00&quot;,&quot;sequence&quot;:83,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Schedule generation completed: 5 rounds with 4 players each&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.387658+01:00&quot;,&quot;sequence&quot;:84,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Received schedule generation request with 4 players and 0 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.387658+01:00&quot;,&quot;sequence&quot;:85,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Generating schedule with 4 players and 0 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.3888197+01:00&quot;,&quot;sequence&quot;:86,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;ERROR&quot;,&quot;message&quot;:&quot;Invalid configuration: Number of rounds must be greater than 0&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.3918247+01:00&quot;,&quot;sequence&quot;:87,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Received schedule generation request with 3 players and 5 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.3918247+01:00&quot;,&quot;sequence&quot;:88,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.ScheduleGenerationService&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;Generating schedule with 3 players and 5 rounds&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+{&quot;timestamp&quot;:&quot;2025-12-06T12:05:53.3928199+01:00&quot;,&quot;sequence&quot;:89,&quot;loggerClassName&quot;:&quot;org.slf4j.impl.Slf4jLogger&quot;,&quot;loggerName&quot;:&quot;at.bigb.planer.service.rest.PlanerResource&quot;,&quot;level&quot;:&quot;ERROR&quot;,&quot;message&quot;:&quot;Invalid configuration: At least 4 players are required&quot;,&quot;threadName&quot;:&quot;Test worker&quot;,&quot;threadId&quot;:1,&quot;mdc&quot;:{},&quot;ndc&quot;:&quot;&quot;,&quot;hostName&quot;:&quot;laptop-bigb&quot;,&quot;processName&quot;:&quot;GradleWorkerMain&quot;,&quot;processId&quot;:12240}
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.6</a> at 06.12.2025, 12:05:54</p>
+</div>
+</div>
+</body>
+</html>

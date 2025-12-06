@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ScheduleMapper Tests" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-12-06T11:05:53" hostname="LAPTOP-BIGB" time="0.039">
+  <properties/>
+  <testcase name="Should map stats Map to ScheduleStatsDto" classname="at.bigb.planer.service.ScheduleMapperTest" time="0.003"/>
+  <testcase name="Should map list of Players to list of PlayerDtos" classname="at.bigb.planer.service.ScheduleMapperTest" time="0.002"/>
+  <testcase name="Should preserve empty rounds list" classname="at.bigb.planer.service.ScheduleMapperTest" time="0.003"/>
+  <testcase name="Should map PlayerDto to Player" classname="at.bigb.planer.service.ScheduleMapperTest" time="0.001"/>
+  <testcase name="Should map ScheduleConfigDto to ScheduleConfig" classname="at.bigb.planer.service.ScheduleMapperTest" time="0.001"/>
+  <testcase name="Should map Plan to PlanDto with all data" classname="at.bigb.planer.service.ScheduleMapperTest" time="0.002"/>
+  <testcase name="Should handle null values gracefully in stats mapping" classname="at.bigb.planer.service.ScheduleMapperTest" time="0.002"/>
+  <testcase name="Should map Player to PlayerDto" classname="at.bigb.planer.service.ScheduleMapperTest" time="0.002"/>
+  <testcase name="Should map RoundDto to Round" classname="at.bigb.planer.service.ScheduleMapperTest" time="0.002"/>
+  <testcase name="Should map Round to RoundDto" classname="at.bigb.planer.service.ScheduleMapperTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

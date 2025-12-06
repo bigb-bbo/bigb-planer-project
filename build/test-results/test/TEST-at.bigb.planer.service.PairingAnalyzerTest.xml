@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="PairingAnalyzer Tests" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-12-06T11:05:52" hostname="LAPTOP-BIGB" time="0.084">
+  <properties/>
+  <testcase name="Should handle order-independent pairing comparison" classname="at.bigb.planer.service.PairingAnalyzerTest" time="0.004"/>
+  <testcase name="Should throw exception when recording pairing with wrong player count" classname="at.bigb.planer.service.PairingAnalyzerTest" time="0.004"/>
+  <testcase name="Should reset all pairings" classname="at.bigb.planer.service.PairingAnalyzerTest" time="0.005"/>
+  <testcase name="Should record a pairing correctly" classname="at.bigb.planer.service.PairingAnalyzerTest" time="0.002"/>
+  <testcase name="Should return 0 frequency for unrecorded pairing" classname="at.bigb.planer.service.PairingAnalyzerTest" time="0.003"/>
+  <testcase name="Should calculate correct statistics" classname="at.bigb.planer.service.PairingAnalyzerTest" time="0.017"/>
+  <testcase name="Should increment frequency when same pairing is recorded" classname="at.bigb.planer.service.PairingAnalyzerTest" time="0.003"/>
+  <testcase name="Should track multiple different pairings" classname="at.bigb.planer.service.PairingAnalyzerTest" time="0.004"/>
+  <testcase name="Should handle statistics with single pairing" classname="at.bigb.planer.service.PairingAnalyzerTest" time="0.005"/>
+  <testcase name="Should return pairings sorted by frequency" classname="at.bigb.planer.service.PairingAnalyzerTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
