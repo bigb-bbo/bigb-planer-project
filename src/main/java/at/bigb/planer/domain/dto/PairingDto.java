@@ -13,6 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PairingDto {
-    private List<String> playerNames; // Nur noch Spielernamen
+    private List<String> playerNames; // only player names
     private int frequency;
 }

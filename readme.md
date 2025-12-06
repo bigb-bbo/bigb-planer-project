@@ -20,13 +20,13 @@ The project was migrated from OpenLiberty to **Quarkus**. Quarkus is a modern Ja
 - Enables native image compilation
 - Supports hot-reload in development mode
 
-## Server starten
+## Start the server
 
 ```bash
 ./gradlew.bat quarkusDev
 ```
 
-Der Server startet auf `http://localhost:8080` mit automatischem Hot-Reload bei Codeänderungen.
+The server starts at `http://localhost:8080` with automatic hot-reload on code changes.
 
 ## API Access
 
@@ -34,14 +34,14 @@ Der Server startet auf `http://localhost:8080` mit automatischem Hot-Reload bei 
 - **Health Check:** `http://localhost:8080/api/planer/health`
 - **Swagger UI:** `http://localhost:8080/swagger-ui`
 
-## Verfügbare Endpunkte
+## Available Endpoints
 
 1. **Health Check:**
    ```
    GET /api/planer/health
    ```
 
-2. **Schedule generieren:**
+2. **Generate schedule:**
    ```
    POST /api/planer/generate
    ```
@@ -54,60 +54,46 @@ Der Server startet auf `http://localhost:8080` mit automatischem Hot-Reload bei 
    }
    ```
 
-3. **Statistiken abrufen:**
+3. **Retrieve statistics:**
    ```
    GET /api/planer/statistics
    ```
 
-4. **Paarungen abrufen:**
+4. **Retrieve pairings:**
    ```
    GET /api/planer/pairings
    ```
 
-Für detaillierte API-Dokumentation siehe `API_ENDPOINTS.md`
+For detailed API documentation see `API_ENDPOINTS.md`
 
-## Tests ausführen
+## Run tests
 
 ```bash
 ./gradlew.bat test
 ```
 
-Für spezifische Tests:
+For specific tests:
 ```bash
 ./gradlew.bat test --tests "ScheduleGenerationServiceTest"
 ./gradlew.bat test --tests "PlanerResourceUnitTest"
 ```
 
 ## FIXED ISSUES:
-- Migriert von OpenLiberty zu Quarkus DONE
-  - Schnellere Startup-Zeiten
-  - Bessere Development Experience mit Hot-Reload
-  - Native Image Support
-- OpenAPI/Swagger UI eingebunden DONE
-  - Interaktive API-Dokumentation unter /swagger-ui
-  - Automatisch generierte Dokumentation basierend auf Annotations
-- REST-Services korrekt konfiguriert DONE
+- Migrated from OpenLiberty to Quarkus DONE
+  - Faster startup times
+  - Better development experience with hot-reload
+  - Native image support
+- OpenAPI/Swagger UI integrated DONE
+  - Interactive API documentation under /swagger-ui
+  - Automatically generated documentation based on annotations
+- REST services configured correctly DONE
   - Base Path: /api
-  - Alle Endpunkte dokumentiert und getestet
+  - All endpoints documented and tested
 
 ## TODOs:
-- UI-Layer erstellen (Frontend mit React/Vue/Angular)
-- Persistierung (Datenbank statt In-Memory)
+- Implement UI layer (Frontend with React/Vue/Angular)
+- Persistence (database instead of in-memory)
 - Authentication & Authorization
-- API-Rate Limiting
-- Erweiterte Validierungen
-- Performance-Optimierungen für große Spielerlisten
-          RestAssured.port = 9980;
-          RestAssured.basePath = "/bigb-planer-project/api";
-      }
-  
-      @Test
-      public void testPlanerResourceIsAccessible() {
-          given()
-              .when()
-              .get("/planer")
-              .then()
-              .statusCode(200)
-              .body("message", equalTo("Expected response message"));
-      }
-  }
+- API rate limiting
+- Extended validations
+- Performance optimizations for large player lists

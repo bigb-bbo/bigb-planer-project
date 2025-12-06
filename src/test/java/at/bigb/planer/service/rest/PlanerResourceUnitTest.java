@@ -189,7 +189,7 @@ class PlanerResourceUnitTest {
     @Test
     @DisplayName("Pairings endpoint should return only player names and frequency")
     void testPairingsEndpointReturnsPlayerNamesOnly() {
-        // Schedule generieren
+        // Generate schedule
         ScheduleConfigDto configDto = new ScheduleConfigDto();
         configDto.setPlayerNames(Arrays.asList("Anna", "Ben", "Chris", "Dora"));
         configDto.setNumberOfRounds(2);
@@ -220,7 +220,7 @@ class PlanerResourceUnitTest {
         assertEquals(4, usage.size());
         int min = usage.values().stream().min(Integer::compareTo).orElse(0);
         int max = usage.values().stream().max(Integer::compareTo).orElse(0);
-        // Alle Spieler sollten gleich oft eingesetzt worden sein
+        // All players should have been used approximately equally
         assertTrue(max - min <= 1, "Player usage should be nearly balanced. Min: " + min + ", Max: " + max);
         for (String name : Arrays.asList("Anna", "Ben", "Chris", "Dora")) {
             assertTrue(usage.containsKey(name), "Usage should contain player " + name);
