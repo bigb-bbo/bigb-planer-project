@@ -89,9 +89,12 @@ For specific tests:
 - REST services configured correctly DONE
   - Base Path: /api
   - All endpoints documented and tested
+- simple UI layer (HTML/JS) for testing DONE
+  - Basic frontend to interact with the API
+  - Simple forms to submit data and view results
 
 ## TODOs:
-- Implement UI layer (Frontend with React/Vue/Angular)
+- Improve UI layer (with React)
 - Persistence (database instead of in-memory)
 - Authentication & Authorization
 - API rate limiting
