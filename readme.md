@@ -95,8 +95,6 @@ For specific tests:
 
 ## TODOs:
 - Improve UI layer (with React)
-- Persistence (database instead of in-memory)
-- Authentication & Authorization
-- API rate limiting
+- Persistence (database instead of in-memory or at least save to json file)
 - Extended validations
 - Performance optimizations for large player lists

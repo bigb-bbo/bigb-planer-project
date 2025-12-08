@@ -3,7 +3,7 @@ const { useState } = React;
 function App() {
   const defaultPlayers = Array.from({ length: 10 }, (_, i) => `Player ${i + 1}`);
   const [players, setPlayers] = useState(defaultPlayers);
-  const [rounds, setRounds] = useState(5);
+  const [rounds, setRounds] = useState(20);
   const [output, setOutput] = useState('');
   const [status, setStatus] = useState('');
 
@@ -16,9 +16,15 @@ function App() {
   async function callHealth() {
     setStatus('calling health...');
     try {
-      const res = await fetch('/planer/health');
+      const res = await fetch('/api/planer/health');
       const text = await res.text();
-      setOutput(text);
+      let json;
+      try {
+        json = JSON.parse(text);
+        setOutput(JSON.stringify(json, null, 2));
+      } catch (parseErr) {
+        setOutput(text);
+      }
       setStatus(`HTTP ${res.status}`);
     } catch (e) {
       setOutput(e.toString());
@@ -30,13 +36,19 @@ function App() {
     setStatus('generating...');
     const body = { playerNames: players, numberOfRounds: Number(rounds) };
     try {
-      const res = await fetch('/planer/generate', {
+      const res = await fetch('/api/planer/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
-      const json = await res.json();
-      setOutput(JSON.stringify(json, null, 2));
+      const text = await res.text();
+      let json;
+      try {
+        json = JSON.parse(text);
+        setOutput(JSON.stringify(json, null, 2));
+      } catch (parseErr) {
+        setOutput(`Response was not JSON: ${text}`);
+      }
       setStatus(`HTTP ${res.status}`);
     } catch (e) {
       setOutput(e.toString());
@@ -47,9 +59,15 @@ function App() {
   async function getPairings() {
     setStatus('loading pairings...');
     try {
-      const res = await fetch('/planer/pairings');
-      const json = await res.json();
-      setOutput(JSON.stringify(json, null, 2));
+      const res = await fetch('/api/planer/pairings');
+      const text = await res.text();
+      let json;
+      try {
+        json = JSON.parse(text);
+        setOutput(JSON.stringify(json, null, 2));
+      } catch (parseErr) {
+        setOutput(`Response was not JSON: ${text}`);
+      }
       setStatus(`HTTP ${res.status}`);
     } catch (e) {
       setOutput(e.toString());
@@ -60,9 +78,15 @@ function App() {
   async function getPlayerUsage() {
     setStatus('loading player usage...');
     try {
-      const res = await fetch('/planer/player-usage');
-      const json = await res.json();
-      setOutput(JSON.stringify(json, null, 2));
+      const res = await fetch('/api/planer/player-usage');
+      const text = await res.text();
+      let json;
+      try {
+        json = JSON.parse(text);
+        setOutput(JSON.stringify(json, null, 2));
+      } catch (parseErr) {
+        setOutput(`Response was not JSON: ${text}`);
+      }
       setStatus(`HTTP ${res.status}`);
     } catch (e) {
       setOutput(e.toString());
@@ -73,9 +97,15 @@ function App() {
   async function getStatistics() {
     setStatus('loading statistics...');
     try {
-      const res = await fetch('/planer/statistics');
-      const json = await res.json();
-      setOutput(JSON.stringify(json, null, 2));
+      const res = await fetch('/api/planer/statistics');
+      const text = await res.text();
+      let json;
+      try {
+        json = JSON.parse(text);
+        setOutput(JSON.stringify(json, null, 2));
+      } catch (parseErr) {
+        setOutput(`Response was not JSON: ${text}`);
+      }
       setStatus(`HTTP ${res.status}`);
     } catch (e) {
       setOutput(e.toString());
@@ -111,7 +141,7 @@ function App() {
       </div>
 
       <footer>
-        <small>Calls backend endpoints under <code>/planer/*</code></small>
+        <small>Calls backend endpoints under <code>/api/planer/*</code></small>
       </footer>
     </div>
   );
