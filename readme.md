@@ -33,6 +33,7 @@ The server starts at `http://localhost:8080` with automatic hot-reload on code c
 - **Base URL:** `http://localhost:8080/api`
 - **Health Check:** `http://localhost:8080/api/planer/health`
 - **Swagger UI:** `http://localhost:8080/swagger-ui`
+- **Simple UI for testing:** `http://localhost:8080/planer/index.html`
 
 ## Available Endpoints
 
@@ -87,14 +88,14 @@ For specific tests:
   - Interactive API documentation under /swagger-ui
   - Automatically generated documentation based on annotations
 - REST services configured correctly DONE
-  - Base Path: /api
+  - Base Path: /api ([](http://localhost:8080/swagger-ui/))
   - All endpoints documented and tested
 - simple UI layer (HTML/JS) for testing DONE
-  - Basic frontend to interact with the API
+  - Basic frontend to interact with the API ([](http://localhost:8080/planer/index.html))
   - Simple forms to submit data and view results
 
 ## TODOs:
 - Improve UI layer (with React)
 - Persistence (database instead of in-memory or at least save to json file)
-- Extended validations
+- Extended validations to match or specific needs for player availability
 - Performance optimizations for large player lists
