@@ -7,6 +7,9 @@ import at.bigb.planer.domain.ScheduleConfig;
 import at.bigb.planer.domain.dto.PairingDto;
 import lombok.extern.slf4j.Slf4j;
 
+import org.eclipse.microprofile.config.ConfigProvider;
+import org.eclipse.microprofile.config.Config;
+
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,14 +21,30 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ScheduleGenerationService {
 
-    private final PairingAlgorithm algorithm;
     private final PairingAnalyzer analyzer;
+    private final PairingGenerator pairingGenerator;
     private List<Player> lastGeneratedPlayers = new ArrayList<>();
     private Plan lastGeneratedPlan; // last generated plan
 
     public ScheduleGenerationService() {
         this.analyzer = new PairingAnalyzer();
-        this.algorithm = new PairingAlgorithm(analyzer);
+        // Read pairing generator configuration from application.properties (MicroProfile Config)
+        Config config = ConfigProvider.getConfig();
+        String strategyStr = config.getOptionalValue("planer.pairing.strategy", String.class).orElse("GREEDY_SHUFFLE");
+        String seedStr = config.getOptionalValue("planer.pairing.seed", String.class).orElse("");
+        int greedyReshuffles = config.getOptionalValue("planer.pairing.greedyReshuffles", Integer.class).orElse(200);
+        long backtrackTimeout = config.getOptionalValue("planer.pairing.backtrackTimeoutMillis", Long.class).orElse(200L);
+        PairingGenerator.Strategy strategy = PairingGenerator.Strategy.GREEDY_SHUFFLE;
+        try {
+            strategy = PairingGenerator.Strategy.valueOf(strategyStr);
+        } catch (Exception e) {
+            log.warn("Invalid planer.pairing.strategy='{}'. Falling back to GREEDY_SHUFFLE", strategyStr);
+        }
+        Long seed = null;
+        if (!seedStr.isBlank()) {
+            try { seed = Long.parseLong(seedStr); } catch (Exception ignored) { seed = null; }
+        }
+        this.pairingGenerator = new PairingGenerator(strategy, seed, greedyReshuffles, backtrackTimeout);
     }
 
     /**
@@ -50,7 +69,7 @@ public class ScheduleGenerationService {
 
         // Create plan
         Plan plan = Plan.create(players, config.getNumberOfRounds());
-        List<Round> rounds = generateRounds(players, config.getNumberOfRounds());
+        List<Round> rounds = generateRounds(players, config.getNumberOfRounds(), config.getPlayersPerRound());
         plan.setRounds(rounds);
         lastGeneratedPlan = plan; // save plan
 
@@ -63,18 +82,40 @@ public class ScheduleGenerationService {
     /**
      * Generates all rounds for the schedule
      */
-    private List<Round> generateRounds(List<Player> players, int numberOfRounds) {
+    private List<Round> generateRounds(List<Player> players, int numberOfRounds, int playersPerRound) {
         List<Round> rounds = new ArrayList<>();
         LocalDate baseDate = LocalDate.now();
 
+        // Prepare a frequency lookup for existing pairings recorded by analyzer
+        // The analyzer expects List<Player>, but our pairingGenerator works with Set<String> of names
         for (int i = 1; i <= numberOfRounds; i++) {
             Round round = new Round();
             round.setRoundNo(i);
             round.setRoundDate(baseDate.plusDays((long) (i - 1) * 7)); // weekly schedule
 
-            // Select 4 players using the greedy algorithm
-            List<Player> selectedPlayers = algorithm.selectPlayersForRound(players);
+            // Select players for this round using PairingGenerator (group of size playersPerRound)
+            List<String> availableNames = players.stream().map(Player::getName).collect(Collectors.toList());
+            List<String> selectedNames = pairingGenerator.selectGroup(availableNames, playersPerRound, (set) -> {
+                // convert Set<String> to List<Player> for analyzer frequency lookup
+                List<Player> plist = players.stream()
+                        .filter(p -> set.contains(p.getName()))
+                        .collect(Collectors.toList());
+                return analyzer.getFrequency(plist);
+            });
+
+            // Map selected names back to Player objects preserving original Player instances
+            List<Player> selectedPlayers = players.stream()
+                    .filter(p -> selectedNames.contains(p.getName()))
+                    .collect(Collectors.toList());
+
             round.setSelectedPlayers(selectedPlayers);
+
+            // record pairing into analyzer
+            if (selectedPlayers.size() == 4) {
+                analyzer.recordPairing(selectedPlayers);
+            } else {
+                log.debug("Skipping analyzer.recordPairing because selectedPlayers.size() != 4: {}", selectedPlayers.size());
+            }
 
             rounds.add(round);
 
