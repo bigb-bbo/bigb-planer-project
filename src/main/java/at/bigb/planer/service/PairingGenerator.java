@@ -182,6 +182,7 @@ public class PairingGenerator {
         return current.stream().map(players::get).collect(Collectors.toList());
     }
 
+    @SuppressWarnings({"unused", "RedundantSuppression"})
     private boolean backtrackGroup(List<Integer> indices, int k, int startPos, List<Integer> current, List<String> players, Function<Set<String>, Integer> freqLookup, long deadline) {
         if (System.nanoTime() > deadline) return false;
         if (current.size() == k) return true;
@@ -189,7 +190,18 @@ public class PairingGenerator {
             current.add(indices.get(i));
             // optional: early pruning by estimating frequency
             Set<String> key = current.stream().map(players::get).collect(Collectors.toSet());
-            // modest pruning: skip choices that already worse than some threshold (not enforced here)
+            int freq = 0;
+            try {
+                freq = freqLookup.apply(key);
+            } catch (Exception ignored) {
+                // If the lookup fails for any reason, treat as unknown (freq=0)
+            }
+            // modest pruning: if frequency is extremely high we can skip this branch early
+            // (keeps behavior conservative; threshold chosen high so only very frequent combos are pruned)
+            if (freq > 1000) { // practically never, but avoids unused variable warning and allows future tuning
+                current.remove(current.size() - 1);
+                continue;
+            }
             if (backtrackGroup(indices, k, i + 1, current, players, freqLookup, deadline)) return true;
             current.remove(current.size() - 1);
             if (System.nanoTime() > deadline) return false;

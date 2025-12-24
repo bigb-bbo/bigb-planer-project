@@ -1,11 +1,37 @@
-const { useState } = React;
+const { useState, useEffect } = React;
 
 function App() {
   const defaultPlayers = Array.from({ length: 10 }, (_, i) => `Player ${i + 1}`);
   const [players, setPlayers] = useState(defaultPlayers);
-  const [rounds, setRounds] = useState(20);
+  const [rounds, setRounds] = useState(30);
   const [output, setOutput] = useState('');
   const [status, setStatus] = useState('');
+
+  useEffect(() => {
+    // Load initial player names from a local JSON file served at /planer/players.json
+    // Expected formats: ["A","B",...] or { "playerNames": ["A", ...] }
+    async function loadPlayers() {
+      try {
+        const res = await fetch('/planer/players.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        if (Array.isArray(data) && data.every(p => typeof p === 'string')) {
+          setPlayers(data);
+          setStatus('Loaded players from /planer/players.json');
+          return;
+        }
+        if (data && Array.isArray(data.playerNames) && data.playerNames.every(p => typeof p === 'string')) {
+          setPlayers(data.playerNames);
+          setStatus('Loaded players from /planer/players.json');
+          return;
+        }
+        setStatus('players.json has invalid format; using defaults');
+      } catch (e) {
+        setStatus('Could not load players.json; using defaults');
+      }
+    }
+    loadPlayers();
+  }, []);
 
   function updatePlayer(index, value) {
     const copy = [...players];
@@ -141,11 +167,10 @@ function App() {
       </div>
 
       <footer>
-        <small>Calls backend endpoints under <code>/api/planer/*</code></small>
+        <small>Calls backend endpoints under <code>/api/planer/*</code> — player names are loaded from <code>/planer/players.json</code></small>
       </footer>
     </div>
   );
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
-

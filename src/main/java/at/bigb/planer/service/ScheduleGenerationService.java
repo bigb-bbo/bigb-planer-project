@@ -42,7 +42,7 @@ public class ScheduleGenerationService {
         }
         Long seed = null;
         if (!seedStr.isBlank()) {
-            try { seed = Long.parseLong(seedStr); } catch (Exception ignored) { seed = null; }
+            try { seed = Long.parseLong(seedStr); } catch (Exception ignored) { /* keep seed null */ }
         }
         this.pairingGenerator = new PairingGenerator(strategy, seed, greedyReshuffles, backtrackTimeout);
     }

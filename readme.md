@@ -35,6 +35,36 @@ The server starts at `http://localhost:8080` with automatic hot-reload on code c
 - **Swagger UI:** `http://localhost:8080/swagger-ui`
 - **Simple UI for testing:** `http://localhost:8080/planer/index.html`
 
+## Frontend — Spielernamen konfigurieren
+
+Die einfache Planer‑UI lädt die initiale Liste der Spielernamen zur Laufzeit aus einer lokalen statischen Datei. Das bedeutet:
+
+- Die Datei, die die Spielernamen enthält, liegt unter:
+  `src/main/resources/META-INF/resources/planer/players.json`
+  und wird im laufenden Server unter `/planer/players.json` ausgeliefert.
+
+- Unterstützte Formate (beide werden erkannt):
+  - Einfaches JSON‑Array von Strings:
+    ```json
+    ["Alice","Bob","Charlie","David","Eve","Frank","Grace","Henry","Iris","Jack"]
+    ```
+  - Objekt mit Feld `playerNames`:
+    ```json
+    { "playerNames": ["Alice","Bob","Charlie","David","Eve","Frank","Grace","Henry","Iris","Jack"] }
+    ```
+
+- Vorgehen zum Anpassen der Spielernamen:
+  1. Öffne die Datei `src/main/resources/META-INF/resources/planer/players.json` in deinem Editor.
+  2. Bearbeite die Liste nach Bedarf (du kannst auch andere Anzahlen verwenden).
+  3. Speichere die Datei.
+  4. Lade die UI im Browser neu (F5). Falls der Browser die Datei cached, mache ein Hard‑Reload (Ctrl+F5) oder leere den Cache.
+     In der Quarkus Dev‑Umgebung sollte die Datei bei Dateispeicherung neu ausgeliefert werden; aus Browser‑Caches resultierende Diskrepanzen bitte durch Hard‑Reload beheben.
+
+- Hinweise:
+  - Die UI zeigt anschließend die geladenen Namen als Initialwerte in den Eingabefeldern an; du kannst sie dort noch manuell anpassen bevor du den Plan generierst.
+  - Es gibt keinen Export‑Button im Frontend; die Datei `players.json` ist die Quelle, die du versionierst und direkt änderst.
+  - Wenn du das Verhalten in der Produktion änderst (z. B. statische Ressourcen in einem ZIP/JAR), achte darauf, dass `players.json` in der ausgelieferten Anwendung vorhanden ist.
+
 ## Available Endpoints
 
 1. **Health Check:**
