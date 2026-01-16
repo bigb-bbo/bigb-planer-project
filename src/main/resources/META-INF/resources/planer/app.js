@@ -139,6 +139,40 @@ function App() {
     }
   }
 
+  // New: download generated plan as XLS-compatible CSV
+  async function downloadPlan() {
+    setStatus('downloading plan...');
+    try {
+      const res = await fetch('/api/planer/download');
+      if (!res.ok) {
+        const text = await res.text();
+        setOutput(text);
+        setStatus(`HTTP ${res.status}`);
+        return;
+      }
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      // try to parse filename from content-disposition header
+      const cd = res.headers.get('Content-Disposition');
+      let filename = 'plan.csv';
+      if (cd) {
+        const match = cd.match(/filename=\s*"?([^";]+)"?/i);
+        if (match) filename = match[1];
+      }
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+      setStatus(`HTTP ${res.status}`);
+    } catch (e) {
+      setOutput(e.toString());
+      setStatus('error');
+    }
+  }
+
   return (
     <div className="container">
       <h1>Planer UI</h1>
@@ -157,6 +191,7 @@ function App() {
             <button onClick={getPlayerUsage}>Player Usage</button>
             <button onClick={getStatistics}>Statistics</button>
             <button onClick={callHealth}>Health</button>
+            <button onClick={downloadPlan}>Download Plan (XLS)</button>
           </div>
         </div>
       </div>

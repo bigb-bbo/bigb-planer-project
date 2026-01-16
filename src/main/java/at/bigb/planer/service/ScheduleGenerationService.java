@@ -193,4 +193,11 @@ public class ScheduleGenerationService {
         }
         return usage;
     }
+
+    /**
+     * Returns the last generated Plan (may be null if none generated yet)
+     */
+    public Plan getLastGeneratedPlan() {
+        return lastGeneratedPlan;
+    }
 }

@@ -9,6 +9,7 @@ import at.bigb.planer.service.ScheduleGenerationService;
 import at.bigb.planer.service.ScheduleMapper;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -17,7 +18,12 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * REST API endpoint for schedule planning operations
@@ -149,6 +155,101 @@ public class PlanerResource {
             log.error("Error retrieving player usage statistics", e);
             throw new InternalServerErrorException("Error retrieving player usage statistics: " + e.getMessage());
         }
+    }
+
+    /**
+     * Downloads the last generated plan as an XLS-compatible CSV file.
+     * Saves the CSV under a local tmp/ directory and returns it as an attachment.
+     * Returns 404 if no plan was generated yet.
+     */
+    @GET
+    @Path("/download")
+    @Produces("application/vnd.ms-excel")
+    @Operation(summary = "Download last plan as XLS-compatible CSV", description = "Returns the most recently generated plan as a CSV file that can be opened in Excel")
+    @APIResponse(responseCode = "200", description = "CSV file returned successfully")
+    @APIResponse(responseCode = "404", description = "No previously generated plan available")
+    public Response downloadLastPlan() {
+        var plan = scheduleService.getLastGeneratedPlan();
+        if (plan == null) {
+            throw new NotFoundException("No generated plan available for download");
+        }
+
+        // Build CSV content: header + rounds. Simple layout: RoundNo,Date,Player1,Player2,Player3,Player4
+        String csv = plan.getRounds().stream().map(r -> {
+            String players = r.getSelectedPlayers().stream()
+                    .map(p -> escapeCsv(p.getName()))
+                    .collect(Collectors.joining(","));
+            return String.format("%d,%s,%s", r.getRoundNo(), r.getRoundDate(), players);
+        }).collect(Collectors.joining("\n"));
+
+        String header = "RoundNo,Date,Player1,Player2,Player3,Player4\n";
+        String content = header + csv;
+
+        try {
+            // allow explicit override of project root via environment variable
+            String explicitRoot = System.getenv("BIGB_PLANER_PROJECT_ROOT");
+            java.nio.file.Path projectRoot;
+            if (explicitRoot != null && !explicitRoot.isBlank()) {
+                projectRoot = Paths.get(explicitRoot).toAbsolutePath();
+            } else {
+                // determine project root (walk up until we find gradlew.bat, build.gradle or settings.gradle)
+                projectRoot = findProjectRoot();
+            }
+             java.nio.file.Path tmpDir = projectRoot.resolve("build").resolve("tmp");
+             if (!Files.exists(tmpDir)) {
+                 Files.createDirectories(tmpDir);
+             }
+             String filename = String.format("plan-%d.csv", System.currentTimeMillis());
+             java.nio.file.Path file = tmpDir.resolve(filename);
+             Files.writeString(file, content, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+
+             return Response.ok(content, "application/vnd.ms-excel")
+                     .header("Content-Disposition", "attachment; filename=" + filename)
+                     .header("X-Server-File", file.toAbsolutePath().toString())
+                     .build();
+         } catch (IOException e) {
+             log.error("Error writing CSV to tmp directory", e);
+             throw new InternalServerErrorException("Could not write CSV file: " + e.getMessage());
+         }
+    }
+
+    private static String escapeCsv(String value) {
+        if (value == null) return "";
+        if (value.contains(",") || value.contains("\n") || value.contains("\"")) {
+            return "\"" + value.replace("\"", "\"\"") + "\"";
+        }
+        return value;
+    }
+
+    // Walk up the directory tree to find the project root by repository folder name or common Gradle files
+    private java.nio.file.Path findProjectRoot() {
+        java.nio.file.Path cur = Paths.get(System.getProperty("user.dir")).toAbsolutePath();
+        while (cur != null) {
+            // first, check if this directory itself is the repository root by name (case-insensitive)
+            java.nio.file.Path name = cur.getFileName();
+            if (name != null && "bigb-planer-project".equalsIgnoreCase(name.toString())) {
+                return cur;
+            }
+            // next, prefer Gradle build files in case the folder name differs
+            if (Files.exists(cur.resolve("gradlew.bat")) || Files.exists(cur.resolve("build.gradle")) || Files.exists(cur.resolve("settings.gradle"))) {
+                return cur;
+            }
+            cur = cur.getParent();
+        }
+
+        // If not found yet, attempt to find a sibling 'bigb-planer-project' by walking parents
+        java.nio.file.Path start = Paths.get(System.getProperty("user.dir")).toAbsolutePath();
+        java.nio.file.Path p = start;
+        while (p != null) {
+            java.nio.file.Path candidate = p.resolve("bigb-planer-project");
+            if (Files.exists(candidate)) {
+                return candidate.toAbsolutePath();
+            }
+            p = p.getParent();
+        }
+
+        // fallback to user.dir absolute path
+        return Paths.get(System.getProperty("user.dir")).toAbsolutePath();
     }
 
 }

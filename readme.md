@@ -62,8 +62,29 @@ Die einfache Planer‑UI lädt die initiale Liste der Spielernamen zur Laufzeit 
 
 - Hinweise:
   - Die UI zeigt anschließend die geladenen Namen als Initialwerte in den Eingabefeldern an; du kannst sie dort noch manuell anpassen bevor du den Plan generierst.
-  - Es gibt keinen Export‑Button im Frontend; die Datei `players.json` ist die Quelle, die du versionierst und direkt änderst.
+  - Die Datei `players.json` ist die Quelle, die du versionierst und direkt änderst.
   - Wenn du das Verhalten in der Produktion änderst (z. B. statische Ressourcen in einem ZIP/JAR), achte darauf, dass `players.json` in der ausgelieferten Anwendung vorhanden ist.
+
+## Download (XLS/CSV)
+
+Die UI bietet jetzt eine Schaltfläche "Download Plan (XLS)", mit der du den zuletzt generierten Spielplan als XLS-kompatible CSV-Datei herunterladen kannst.
+
+- Woher kommt die Datei?
+  - Der Server liefert die zuletzt generierte Planung (nur, wenn zuvor über den `/api/planer/generate`-Endpoint ein Plan erzeugt wurde).
+  - Der Download-Endpoint ist: `GET /api/planer/download`.
+
+- Format:
+  - Die Datei ist eine kommagetrennte CSV mit Header: `RoundNo,Date,Player1,Player2,Player3,Player4`.
+  - Der Server setzt den Response-Header `Content-Disposition: attachment; filename=plan-<timestamp>.csv`.
+  - Zusätzlich schreibt der Server die CSV in das lokale `tmp/`-Verzeichnis des Anwendungs-Arbeitsverzeichnisses (relativ zum Projekt-Root).
+    - Dateiname-Schema: `tmp/plan-<timestamp>.csv` (Beispiel: `tmp/plan-1627891234567.csv`).
+    - Der Server liefert den absoluten Serverpfad der gespeicherten Datei im Header `X-Server-File`.
+
+- Wo landet die Datei im Client?
+  - Die Datei wird vom Browser als Download behandelt und üblicherweise im Standard-Download-Ordner des Betriebssystems gespeichert.
+
+- UI:
+  - Im Test-UI (`/planer/index.html`) findest du nun neben den anderen Buttons einen Button "Download Plan (XLS)". Er ruft den Endpoint auf und startet den Browser-Download. Zusätzlich ist die Datei serverseitig unter `tmp/plan-<timestamp>.csv` abgelegt.
 
 ## Available Endpoints
 
@@ -93,6 +114,11 @@ Die einfache Planer‑UI lädt die initiale Liste der Spielernamen zur Laufzeit 
 4. **Retrieve pairings:**
    ```
    GET /api/planer/pairings
+   ```
+
+5. **Download last generated plan (CSV/XLS compatible):**
+   ```
+   GET /api/planer/download
    ```
 
 For detailed API documentation see `API_ENDPOINTS.md`
