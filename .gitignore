@@ -46,3 +46,5 @@ node_modules/
 *.tmp
 *.swp
 
+# clean .idea-folder
+/.idea/* !.idea/codeStyles/ !.idea/inspectionProfiles/ !.idea/runConfigurations/ !.idea/dictionaries/
