@@ -22,8 +22,9 @@ The project was migrated from OpenLiberty to **Quarkus**. Quarkus is a modern Ja
 
 ## Start the server
 
+In WSL terminal use:
 ```bash
-./gradlew.bat quarkusDev
+./gradlew quarkusDev (or simply "sh startQuarkusDev.sh" from any directory)
 ```
 
 The server starts at `http://localhost:8080` with automatic hot-reload on code changes.
